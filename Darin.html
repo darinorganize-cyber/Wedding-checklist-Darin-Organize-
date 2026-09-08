@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darin Organize — ລາຍການກຽມງານແຕ່ງດອງ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Lao:wght@500;600;700&family=Noto+Sans+Lao:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FBF3E6;
+    --ivory-deep:#F3E6D2;
+    --maroon:#E31E1E;
+    --maroon-deep:#B01414;
+    --gold:#B8912E;
+    --gold-light:#E8CD8A;
+    --ink:#2B1B17;
+    --ink-soft:#6B5A52;
+    --line:#E4D3B8;
+    --done:#8C9C7A;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ivory);
+    background-image:
+      radial-gradient(circle at 100% 0%, rgba(184,145,46,0.08), transparent 45%),
+      radial-gradient(circle at 0% 100%, rgba(122,31,43,0.06), transparent 45%);
+    font-family:'Noto Sans Lao', sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:60px;
+  }
+  a{color:inherit;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(160deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+    color:var(--ivory);
+    padding:38px 22px 46px;
+    overflow:hidden;
+    border-bottom:4px solid var(--gold);
+  }
+  .hero .flower{
+    position:absolute;
+    top:-30px; right:-30px;
+    width:170px; height:170px;
+    opacity:0.16;
+  }
+  .hero .flower2{
+    position:absolute;
+    bottom:-40px; left:-20px;
+    width:120px; height:120px;
+    opacity:0.12;
+    transform:rotate(35deg);
+  }
+  .brand-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:rgba(0,0,0,0.18);
+    border:1px solid rgba(255,255,255,0.25);
+    padding:6px 14px 6px 10px;
+    border-radius:30px;
+    margin-bottom:16px;
+    position:relative;
+  }
+  .brand-badge svg{width:16px;height:16px;flex-shrink:0;}
+  .brand-badge span{
+    font-family:'Noto Serif Lao', serif;
+    font-weight:700;
+    font-size:13px;
+    color:#fff;
+    letter-spacing:0.01em;
+  }
+  .hero-tagline{
+    font-style:italic;
+    font-size:12.5px !important;
+    color:var(--gold-light) !important;
+    margin-top:8px !important;
+    opacity:0.9;
+  }
+  .hero-eyebrow{
+    font-size:13px;
+    letter-spacing:0.02em;
+    color:var(--gold-light);
+    margin-bottom:6px;
+    position:relative;
+  }
+  .hero h1{
+    font-family:'Noto Serif Lao', serif;
+    font-weight:700;
+    font-size:30px;
+    line-height:1.35;
+    margin:0 0 10px;
+    position:relative;
+    max-width:280px;
+  }
+  .hero p{
+    font-size:14.5px;
+    line-height:1.6;
+    color:#F1DFC7;
+    margin:0;
+    max-width:300px;
+    position:relative;
+  }
+
+  /* ---------- PROGRESS ---------- */
+  .progress-wrap{
+    margin:-26px 18px 0;
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(90,40,20,0.14);
+    padding:18px 20px;
+    position:relative;
+    z-index:2;
+    border:1px solid var(--line);
+  }
+  .progress-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:10px;
+  }
+  .progress-top .label{
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .progress-top .count{
+    font-family:'Noto Serif Lao', serif;
+    font-weight:700;
+    font-size:18px;
+    color:var(--maroon);
+  }
+  .bar-track{
+    height:9px;
+    background:var(--ivory-deep);
+    border-radius:20px;
+    overflow:hidden;
+  }
+  .bar-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg, var(--gold), var(--maroon));
+    border-radius:20px;
+    transition:width .4s ease;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{
+    padding:30px 18px 0;
+    position:relative;
+  }
+  .phase-label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:34px 0 14px;
+  }
+  .phase-label:first-child{margin-top:0;}
+  .phase-dot{
+    width:10px;height:10px;border-radius:50%;
+    background:var(--maroon);
+    flex-shrink:0;
+    box-shadow:0 0 0 4px rgba(122,31,43,0.12);
+  }
+  .phase-label .txt{
+    font-family:'Noto Serif Lao', serif;
+    font-weight:600;
+    font-size:13.5px;
+    color:var(--maroon);
+    letter-spacing:0.01em;
+  }
+  .phase-line{
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* ---------- SECTION CARD ---------- */
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    margin-bottom:14px;
+    overflow:hidden;
+    box-shadow:0 4px 14px rgba(90,40,20,0.05);
+  }
+  .card-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:16px 16px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .card-icon{
+    width:38px;height:38px;
+    flex-shrink:0;
+    border-radius:11px;
+    background:var(--ivory-deep);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .card-icon svg{width:21px;height:21px;}
+  .card-title{
+    flex:1;
+    min-width:0;
+  }
+  .card-title h3{
+    font-family:'Noto Serif Lao', serif;
+    font-size:15.5px;
+    font-weight:600;
+    margin:0 0 3px;
+    color:var(--ink);
+    line-height:1.4;
+  }
+  .card-title .sub{
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .chev{
+    width:20px;height:20px;
+    flex-shrink:0;
+    color:var(--gold);
+    transition:transform .25s ease;
+  }
+  .card.open .chev{transform:rotate(180deg);}
+  .card-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .card.open .card-body{
+    max-height:2000px;
+  }
+  .item-list{
+    padding:2px 16px 14px;
+  }
+  .item{
+    display:flex;
+    gap:11px;
+    align-items:flex-start;
+    padding:10px 2px;
+    border-top:1px solid #F1E7D6;
+  }
+  .item:first-child{border-top:none;}
+  .check{
+    width:21px;height:21px;
+    border-radius:7px;
+    border:1.6px solid var(--gold);
+    flex-shrink:0;
+    margin-top:1px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .check svg{width:13px;height:13px;opacity:0;transition:opacity .15s ease;}
+  .item.done .check{background:var(--done);border-color:var(--done);}
+  .item.done .check svg{opacity:1;}
+  .item-text{
+    flex:1;
+    font-size:14px;
+    line-height:1.55;
+    cursor:pointer;
+  }
+  .item.done .item-text .main{
+    color:var(--ink-soft);
+    text-decoration:line-through;
+    text-decoration-color:var(--line);
+  }
+  .item-text .note{
+    display:block;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:2px;
+    line-height:1.5;
+  }
+  .item.suggested .item-text .main::after{
+    content:"ແນະນຳເພີ່ມ";
+    display:inline-block;
+    margin-left:7px;
+    font-size:10px;
+    background:var(--ivory-deep);
+    color:var(--maroon);
+    padding:1px 7px;
+    border-radius:20px;
+    vertical-align:middle;
+    text-decoration:none;
+  }
+
+  /* ---------- FOOTER NOTE ---------- */
+  .footer-note{
+    margin:36px 18px 0;
+    padding:18px 20px;
+    background:var(--maroon);
+    color:var(--ivory);
+    border-radius:16px;
+    font-size:13px;
+    line-height:1.7;
+  }
+  .footer-note b{color:var(--gold-light);}
+
+  .brand-foot{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:11.5px;
+    margin-top:22px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <svg class="flower" viewBox="0 0 100 100" fill="none"><g fill="#fff"><ellipse cx="50" cy="30" rx="10" ry="20"/><ellipse cx="50" cy="30" rx="10" ry="20" transform="rotate(72 50 50)"/><ellipse cx="50" cy="30" rx="10" ry="20" transform="rotate(144 50 50)"/><ellipse cx="50" cy="30" rx="10" ry="20" transform="rotate(216 50 50)"/><ellipse cx="50" cy="30" rx="10" ry="20" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="7" fill="#B8912E"/></g></svg>
+  <svg class="flower2" viewBox="0 0 100 100" fill="none"><g fill="#fff"><ellipse cx="50" cy="30" rx="10" ry="20"/><ellipse cx="50" cy="30" rx="10" ry="20" transform="rotate(72 50 50)"/><ellipse cx="50" cy="30" rx="10" ry="20" transform="rotate(144 50 50)"/><ellipse cx="50" cy="30" rx="10" ry="20" transform="rotate(216 50 50)"/><ellipse cx="50" cy="30" rx="10" ry="20" transform="rotate(288 50 50)"/><circle cx="50" cy="50" r="7" fill="#B8912E"/></g></svg>
+  <div class="brand-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l1.2 3.6L17 8l-3.8 1.4L12 13l-1.2-3.6L7 8l3.8-1.4L12 3z"/><circle cx="12" cy="8" r="7.2" opacity=".55"/></svg>
+    <span>Darin Organize</span>
+  </div>
+  <div class="hero-eyebrow">ຄູ່ມືກຽມງານມາງມົງຄຸນ</div>
+  <h1>ລາຍການກຽມງານແຕ່ງດອງ</h1>
+  <p>ຈາກງານໝັ້ນ ສູ່ງານບາສີສູ່ຂວັນ ແລະ ງານລ້ຽງຕອນແລງ — ທຸກຂັ້ນຕອນລວມໄວ້ໃນບ່ອນດຽວ ເພື່ອໃຫ້ວັນສຳຄັນຂອງທ່ານພ້ອມສົມບູນທຸກຢ່າງ.</p>
+  <p class="hero-tagline">ເພາະເຮົາດູແລທ່ານ ດັ່ງພວກເຮົາຮັກເອື້ອຍນ້ອງ</p>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-top">
+    <span class="label">ຄວາມຄືບໜ້າລວມ</span>
+    <span class="count"><span id="doneCount">0</span>/<span id="totalCount">0</span> ລາຍການ</span>
+  </div>
+  <div class="bar-track"><div class="bar-fill" id="barFill"></div></div>
+</div>
+
+<div class="timeline" id="timeline"></div>
+
+<div class="footer-note">
+  <b>ໝາຍເຫດ:</b> ຖ້າຈັດພິທີສູ່ຂວັນຢູ່ບ້ານ (ບໍ່ແມ່ນຫ້ອງແກ້ວ/ໂຮງແຮມ) ຢ່າລືມກຽມ ໂຕະຕັ່ງເຕັ້ນ, ອາຫານ, ສາກສຳລັບພາຂວັນ ແລະ ຫ້ອງຫໍ, ພ້ອມທັງຕົບແຕ່ງສະຖານທີ່ທັງພາຍໃນ ແລະ ພາຍນອກ.
+</div>
+
+<div class="brand-foot">ແຕະຫົວຂໍ້ເພື່ອເປີດ/ປິດ · ແຕະລາຍການເພື່ອຫຼືກເຄື່ອງໝາຍວ່າແລ້ວ<br>ຈັດເຮັດໂດຍ <b style="color:#E31E1E;">Darin Organize</b></div>
+
+<script>
+const ICONS = {
+  budget: '<svg viewBox="0 0 24 24" fill="none" stroke="#E31E1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="12" cy="14.5" r="2"/></svg>',
+  betrothal: '<svg viewBox="0 0 24 24" fill="none" stroke="#E31E1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4.2"/><circle cx="16" cy="15" r="4.2"/><path d="M12 6.5V9"/></svg>',
+  booking: '<svg viewBox="0 0 24 24" fill="none" stroke="#E31E1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg>',
+  ceremony: '<svg viewBox="0 0 24 24" fill="none" stroke="#E31E1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.2L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.6-.8L12 3z"/></svg>',
+  party: '<svg viewBox="0 0 24 24" fill="none" stroke="#E31E1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21l3-11 9 3-8 9-4-1z"/><path d="M14 8l6-4M17 3l1 4"/></svg>',
+  home: '<svg viewBox="0 0 24 24" fill="none" stroke="#E31E1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>'
+};
+const CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
+
+const DATA = [
+  {
+    phase: "8–12 ເດືອນກ່ອນງານ",
+    sections: [
+      {
+        icon: "budget",
+        title: "ຫງົບປະມານ ແລະ ວັນເວລາ",
+        sub: "ຈຸດເລີ່ມຕົ້ນຂອງທຸກການວາງແຜນ",
+        items: [
+          { t: "ຕົກລົງເລືອກມື້ສຳລັບຈັດງານ" },
+          { t: "ຕົກລົງເລື່ອງຫງົບປະມານສຳລັບຈັດງານ ແລະ ວາງແຜນການເງິນ" },
+          { t: "ຕົກລົງເລືອກສະຖານທີ່ສຳລັບຈັດງານ" },
+          { t: "ກຳນົດຈຳນວນແຂກໂດຍປະມານ ເພື່ອຄາດຄະເນຄ່າໃຊ້ຈ່າຍ", s: true }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "3–5 ເດືອນກ່ອນງານ",
+    sections: [
+      {
+        icon: "betrothal",
+        title: "ພິທີການສູ່ຂໍ",
+        sub: "9 ລາຍການ",
+        items: [
+          { t: "ເລືອກມື້ເພື່ອຈັດພິທີການ" },
+          { t: "ຂັນໝາກ ແລະ ຂັນວາງສິນສອດ" },
+          { t: "ໃບແຕ່ງງານ (ເພື່ອລົງນາມ ທັງ 2 ຝ່າຍ)" },
+          { t: "ນາຍບ້ານ ເພື່ອເປັນພະຍານ" },
+          { t: "ໝໍພອນເພື່ອເຮັດພິທີການສູ່ຂໍຕາມຮີດ" },
+          { t: "ສະຖານທີ່ ທັງ 2 ພິທີການຈັດງານ (ຫຼັງຈາກຕົກລົງກັນແລ້ວ)" },
+          { t: "ງານສູ່ຂວັນ (ບ້ານເຈົ້າສາວ ຫຼື ພັດທະຄານ)" },
+          { t: "ພິທີການງານລ້ຽງ (ບ້ານເຈົ້າສາວ ຫຼື ພັດທະຄານ)" },
+          { t: "ຮ້ານເຮັດບັດເຊີນ ພ້ອມລາຍຊື່ແຂກ", s: true }
+        ]
+      },
+      {
+        icon: "booking",
+        title: "ລາຍການຕ້ອງຈອງກ່ອນ",
+        sub: "ບໍລິການ ແລະ ອຸປະກອນຫຼັກ",
+        items: [
+          { t: "ຊ່າງພາບ ແລະ ວິດີໂອ", n: "ແນະນຳຈ້າງວິດີໂອຄູ່ກັບຮູບພາບ ເນື່ອງຈາກຄວາມຊົງຈຳ ແລະ ຄວາມຮູ້ສຶກສາມາດຖ່າຍທອດຜ່ານການເຄື່ອນໄຫວໄດ້ດີກວ່າ" },
+          { t: "ຊ່າງແຕ່ງໜ້າ ສຳລັບບ່າວສາວ", n: "ຕ້ອງຖາມທຸກຄັ້ງວ່າລວມເຄື່ອງປະດັບ ຫຼື ບໍ່" },
+          { t: "ຊ່າງແຕ່ງໜ້າ ສຳລັບເຈົ້າພາບ", n: "ເພື່ອຄຸມເວລາ ແລະ ເຮັດໃຫ້ເຈົ້າພາບເດັ່ນພາຍໃນງານ" },
+          { t: "ອໍແກໄນ ສຳລັບດູແລ 2 ພິທີການ (ງານບາສີສູ່ຂວັນ ແລະ ງານລ້ຽງຕອນແລງ)" },
+          { t: "ຮ້ານເຮັດບັດເຊີນ" },
+          { t: "ເກີບບ່າວສາວ ສຳລັບ 2 ພິທີການ" },
+          { t: "ສະຕູດີໂອ ສຳລັບຖ່າຍພຣີເວດດິ້ງ ຫຼື ຖ່າຍນອກສະຖານທີ່" },
+          { t: "ວົງດົນຕີ ຫຼື DJ ສຳລັບງານລ້ຽງຕອນແລງ (ຖ້າຕ້ອງການ)" },
+          { t: "ຂະບວນລົດຮັບ-ສົ່ງບ່າວສາວ", s: true },
+          { t: "ດອກໄມ້ຕົບແຕ່ງ ແລະ ຊໍ່ດອກໄມ້ເຈົ້າສາວ", s: true },
+          { t: "ເຄັກແຕ່ງງານ ຫຼື ຂອງຫວານສຳລັບງານລ້ຽງ", s: true },
+          { t: "ຂອງຂວັນນ້ອຍໆສຳລັບແຂກ (Wedding favor)", s: true }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "ພິທີບາສີສູ່ຂວັນ",
+    sections: [
+      {
+        icon: "ceremony",
+        title: "ພິທີການ ບາສີສູ່ຂວັນ",
+        sub: "22 ລາຍການ — ຮີດຄອງ ແລະ ອຸປະກອນ",
+        items: [
+          { t: "ສີຊຸດ ຫຼື ສີໂທນງານ" },
+          { t: "ຈຳນວນແຂກສຳລັບພິທີການງານສູ່ຂວັນ", n: "ເພື່ອຫັກລົບກັບຈຳນວນແຂກງານລ້ຽງ" },
+          { t: "ແຫວນແຕ່ງດອງຂອງເຈົ້າບ່າວເຈົ້າສາວ", n: "ແຫວນຄຳ ຫຼື ເພັດ ພ້ອມກ່ອງແຫວນສຳລັບຖ່າຍພາບ" },
+          { t: "ຊຸດບ່າວສາວສຳລັບພິທີການງານສູ່ຂວັນ", n: "ຊຸດລາວ ຫຼື ຊຸດຫຼວງພະບາງ" },
+          { t: "ຊຸດເຈົ້າພາບ ທັງ 2 ຝ່າຍ" },
+          { t: "ເກີບບ່າວສາວ" },
+          { t: "ພາຂວັນເຊັດໃຫຍ່", n: "ໃຫ້ຖືກຕາມຮີດ ແລະ ພິທີການ (ພາຂວັນແບບວຽງຈັນ ຫຼື ຫລວງພະບາງ)" },
+          { t: "ດາບ, ຄັນຮົ່ມ, ຖົງພາຍ ສຳລັບເຈົ້າບ່າວ", n: "ລາຍການແນະນຳເຊົ່າເພີ່ມ ເນື່ອງຈາກບໍ່ໄດ້ມາພ້ອມພາຂວັນ" },
+          { t: "ເງິນສຳລັບໃສ່ບັ້ງສົມມາ ພໍ່ແມ່ນ ພ້ອມແຂກຜູ້ໃຫຍ່", n: "ຈຳນວນ 50–100 ບັ້ງ ເງິນສາມາດໃສ່ຕາມກຳລັງໄດ້" },
+          { t: "ເງິນ-ຄຳ ສຳລັບວາງໃສ່ຂັນໝາກ", n: "ສາມາດໃສ່ໄດ້ຕາມກຳລັງ" },
+          { t: "ອາຫານສຳລັບຕ້ອນຮັບແຂກ" },
+          { t: "ໝໍພອນນຳພາເຮັດພິທີການ", n: "ຄ່າຄາຍໝໍພອນໃຫ້ທຸກຄັ້ງທີ່ຈົບພິທີການ" },
+          { t: "ຄົນເຮັດພິທີການປູຕຽງ" },
+          { t: "ຄົນຈູງເຈົ້າບ່າວເຂົ້າງານ" },
+          { t: "ຄົນຈູງເຈົ້າສາວເຂົ້າງານ" },
+          { t: "ຄົນລ້າງຕີນເຈົ້າບ່າວກ່ອນເຂົ້າງານ", n: "ໂດຍປົກກະຕິແມ່ນນ້ອງສາວ ຫຼື ຫຼານ" },
+          { t: "ຂອງໄຫວ້ຄາລະວະພໍ່ແມ່ ແລະ ຜູ້ໃຫຍ່", s: true },
+          { t: "ລຳໂພງ/ໄມໂຄຣໂຟນ ສຳລັບໝໍພອນ", s: true }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "ງານລ້ຽງຕອນແລງ",
+    sections: [
+      {
+        icon: "party",
+        title: "ພິທີການງານລ້ຽງຕອນແລງ",
+        sub: "7 ລາຍການ",
+        items: [
+          { t: "ຈຳນວນແຂກສຳລັບງານລ້ຽງຕອນແລງ" },
+          { t: "ແຈ້ງເຈົ້າພາບສຳລັບຖ່າຍຮູບລວມ" },
+          { t: "ວົງດົນຕີ ຖ້າຫາກຕ້ອງການນຳເຂົ້າເອງ" },
+          { t: "ຊຸດສຳລັບງານລ້ຽງຕອນແລງ" },
+          { t: "ເກີບສຳລັບງານແລງ" },
+          { t: "ຊຸດລາຕີ" },
+          { t: "ຊຸດອັບເຕີ້ປາຕີ້" },
+          { t: "ຝ່າຍຕ້ອນຮັບແຂກ ແລະ ປ້າຍລົງທະບຽນ", s: true }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "ໝາຍເຫດ — ຈັດຢູ່ບ້ານ",
+    sections: [
+      {
+        icon: "home",
+        title: "ໃນກໍລະນີຈັດພິທີສູ່ຂວັນຢູ່ບ້ານ",
+        sub: "ອຸປະກອນເພີ່ມທີ່ຫ້ອງແກ້ວ/ໂຮງແຮມບໍ່ມີໃຫ້",
+        items: [
+          { t: "ໂຕະຕັ່ງເຕັ້ນ" },
+          { t: "ອາຫານ" },
+          { t: "ສາກສຳລັບພາຂວັນ" },
+          { t: "ສາກສຳລັບຫ້ອງຫໍ" },
+          { t: "ຕົບແຕ່ງສະຖານທີ່ນອກ ແລະ ໃນ ເພື່ອຄວາມສວຍງາມ" },
+          { t: "ຈຸດຈອດລົດສຳລັບແຂກ", s: true },
+          { t: "ຫ້ອງນ້ຳສະອາດພຽງພໍສຳລັບແຂກ", s: true }
+        ]
+      }
+    ]
+  }
+];
+
+const timeline = document.getElementById('timeline');
+let totalItems = 0;
+
+DATA.forEach((phaseGroup, pIdx) => {
+  const label = document.createElement('div');
+  label.className = 'phase-label';
+  label.innerHTML = `<div class="phase-dot"></div><div class="txt">${phaseGroup.phase}</div><div class="phase-line"></div>`;
+  timeline.appendChild(label);
+
+  phaseGroup.sections.forEach((sec, sIdx) => {
+    const card = document.createElement('div');
+    card.className = 'card' + (pIdx === 0 && sIdx === 0 ? ' open' : '');
+
+    const head = document.createElement('div');
+    head.className = 'card-head';
+    head.innerHTML = `
+      <div class="card-icon">${ICONS[sec.icon]}</div>
+      <div class="card-title">
+        <h3>${sec.title}</h3>
+        <div class="sub">${sec.sub}</div>
+      </div>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    `;
+    head.addEventListener('click', () => card.classList.toggle('open'));
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+    const list = document.createElement('div');
+    list.className = 'item-list';
+
+    sec.items.forEach(it => {
+      totalItems++;
+      const row = document.createElement('div');
+      row.className = 'item' + (it.s ? ' suggested' : '');
+      row.innerHTML = `
+        <div class="check">${CHECK_SVG}</div>
+        <div class="item-text">
+          <span class="main">${it.t}</span>
+          ${it.n ? `<span class="note">${it.n}</span>` : ''}
+        </div>
+      `;
+      const key = 'wc_' + pIdx + '_' + sIdx + '_' + totalItems;
+      row.dataset.key = key;
+      try{ if(localStorage.getItem(key) === '1'){ row.classList.add('done'); } }catch(e){}
+      row.addEventListener('click', () => {
+        row.classList.toggle('done');
+        try{ localStorage.setItem(row.dataset.key, row.classList.contains('done') ? '1' : '0'); }catch(e){}
+        updateProgress();
+      });
+      list.appendChild(row);
+    });
+
+    body.appendChild(list);
+    card.appendChild(head);
+    card.appendChild(body);
+    timeline.appendChild(card);
+  });
+});
+
+document.getElementById('totalCount').textContent = totalItems;
+
+function updateProgress(){
+  const done = document.querySelectorAll('.item.done').length;
+  document.getElementById('doneCount').textContent = done;
+  const pct = totalItems ? (done / totalItems) * 100 : 0;
+  document.getElementById('barFill').style.width = pct + '%';
+}
+updateProgress();
+</script>
+
+</body>
+</html>
