@@ -161,9 +161,66 @@
   }
   .song-card .play{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:var(--maroon);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;}
   .song-card .name{font-size:14.5px;font-weight:500;flex:1;line-height:1.3;}
+
+  /* ---------- VENDORS ---------- */
+  .vendor-list{padding:2px 15px 14px;}
+  .vendor-card{
+    display:flex;align-items:center;gap:12px;background:var(--ivory);
+    border-radius:12px;padding:11px 12px;margin-bottom:9px;text-decoration:none;color:var(--ink);
+    border:1px solid #F1E7D6;
+  }
+  .vendor-card .vimg{
+    width:46px;height:46px;border-radius:10px;flex-shrink:0;object-fit:cover;
+    background:var(--ivory-deep);
+  }
+  .vendor-card .vinfo{flex:1;min-width:0;}
+  .vendor-card .vinfo .vname{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+  .vendor-card .vinfo .vnote{font-size:11.5px;color:var(--ink-soft);line-height:1.4;}
+  .vendor-card .vfb{
+    flex-shrink:0;width:32px;height:32px;border-radius:50%;background:#1877F2;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;
+  }
+  .vendor-empty{
+    text-align:center;padding:20px 10px;color:var(--ink-soft);font-size:12.5px;line-height:1.7;
+  }
+
+  /* ---------- GATE (PASSCODE) ---------- */
+  .gate-screen{
+    position:fixed;inset:0;z-index:100;
+    background:linear-gradient(160deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+    display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  .gate-box{
+    background:#fff;border-radius:20px;padding:32px 26px;max-width:320px;width:100%;
+    text-align:center;box-shadow:0 20px 50px rgba(0,0,0,0.3);
+  }
+  .gate-logo{max-width:140px;width:60%;height:auto;border-radius:12px;margin-bottom:18px;}
+  .gate-label{font-size:13.5px;color:var(--ink-soft);margin:0 0 16px;}
+  .gate-box input{
+    width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);
+    font-size:16px;text-align:center;letter-spacing:2px;margin-bottom:14px;font-family:inherit;
+  }
+  .gate-box input:focus{outline:none;border-color:var(--maroon);}
+  .gate-btn{
+    width:100%;padding:12px;border:none;border-radius:10px;background:var(--maroon);
+    color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;
+  }
+  .gate-msg{font-size:12px;color:var(--maroon);margin-top:10px;min-height:16px;}
 </style>
 </head>
 <body>
+
+<div id="gateScreen" class="gate-screen">
+  <div class="gate-box">
+    <img class="gate-logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/+EVB0V4aWYAAE1NACoAAAAIAAYBEgADAAAAAQABAAABGgAFAAAAAQAAAFYBGwAFAAAAAQAAAF4BKAADAAAAAQACAAACEwADAAAAAQABAACHaQAEAAAAAQAAAGYAAADAAAAASAAAAAEAAABIAAAAAQAHkAAABwAAAAQwMjIxkQEABwAAAAQBAgMAoAAABwAAAAQwMTAwoAEAAwAAAAEAAQAAoAIABAAAAAEAAAYboAMABAAAAAEAAAYbpAYAAwAAAAEAAAAAAAAAAAAGAQMAAwAAAAEABgAAARoABQAAAAEAAAEOARsABQAAAAEAAAEWASgAAwAAAAEAAgAAAgEABAAAAAEAAAEeAgIABAAAAAEAABPfAAAAAAAAAEgAAAABAAAASAAAAAH/2P/bAIQAAQEBAQEBAgEBAgMCAgIDBAMDAwMEBQQEBAQEBQYFBQUFBQUGBgYGBgYGBgcHBwcHBwgICAgICQkJCQkJCQkJCQEBAQECAgIEAgIECQYFBgkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJ/90ABAAK/8AAEQgAoACgAwEiAAIRAQMRAf/EAaIAAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKCxAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6AQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgsRAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A/L+iiiv8vz/u4CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Q/L+iiiv8vz/u4CiiigAooooAKKKKACiiigAooooAKKKKACinbCF3HpTaACiiigAooooA/9H8v6KKK/y/P+7gKKKKACiiigApQD2qzHAsiAjrVmOMDhadjKVVIorC57U77O9aqws1O+zNVchg8UjEMbL1plbTRsOKqNAHOF6+lTymsa6ZQq2kIRfMl4rVj09bKAXN33HC1jXE3nPu6DsKbjbcinW9p8OwyR959u1R0UVJ02CiiigYUUUUAf/S/L+iiiv8vz/u4CiiigApyLuOKbVu2QfeNBMnZF2EbSB6V1dppIvYRLbjkdRXP2kQdgK9R8LQPBdJIgz7V34WlfRnyWeY50oc0TEttEc8Yq+/h+ZUyR2r640f4XJ4h08a1ose4D/WIOq//WrVu/hHe/Z49sBLOOmK+khkdS2iPxbEeLOEhNwnNK2/kfDFxokjHZGuT2ArUl8P2/hm1F9q+DOwykXp7mvva+/Z81bwHoSeItfitbW6uB/o6388VsFH94LIQzfgK+HfiToPiHR9aaHxGFMsqiaN43WWKSN/uvHIhKspxwQe2O1YZhk1TCx5px1/I9bg7xIwWfVvZYSsuRdnrK29vJHkmp3Et7KZpPy7CsStqVMZyOKyHBDc18rLc/esNblSQyiiipOgKKKKACiiigD/0/y/ooor/L8/7uD2L4efs9/HX4taTLr3wv8AB+r+ILK3l8iSewtJJ40lxnYWQEBsYOPSuL8a+APHXw21tvDPxD0a90LUUUMba/ge3l2nodsgBx7jiv0X8M+K/FHhH/gk3e3/AIU1K60yd/ibEjSWkzwOV/s0/KWjKnHA46Vb8QeJdW+PX/BNWHxx8ZNQuNT1TwF43ttIsNTnJmu00zUIN01v5jHdIsbDeqseuBX6FU4XwkqKp0m1U9mp9OX08tD+OcL48cQ4fMZYvH06UsC8XLCJRUlVi0vdndtxld2TjaNk730PywxV23wI6/Wbw5+xr8Evi14G8Vr8PfCXxB8O3WgaBe65p3iHXY4xp2oDT4jM0csIgTyBOinycOcHAPNeW3fwI/Ze+Gn7JHw//aD+JVxrmp6747t9SSDSLGaGGJZrObyxO8jxkrCgKgoMs7HqAK46/AuKpJ1KkoqKXNfVK10u197dD6PKvpX5BmFSGEwdCrOvKoqSpxUHLmdN1E24zcUuSMm7y93laaR8Z6h4H8YeEodNvvFmk3emw6vb/arF7qF4luYOgliLAb09xxXofhGKJpkD1+gnhT9mbw/8Xfiv8Cfhj8RfFOtXWl+KPA13qbvcTrJ/Z32aGWVIrQFPkt1MYJTBOBgHpjI+H3wg/Zn+LvgXxppnwTOvweKvA9gNSS71GaB7PVYIZRHclYI41a3ODviG48YB5r3P9Sq0J/u2ktbJvV8sU3aytsz8vX0n8vxOCisZTm5JQdScIWpwVWrOlTbvLm+KFnZO2/wnefs42cK6tbrA4fzCqmPaTvB/hx79K/WP4rfCrwJ8FvCa+LPD8SXOqljHF56o6WZ2q+SgJBcFsLuGBjpmvyu+GHjfRfgX4Hk8YQFbjXJ5DZWMhwUimA3TSKO/kqQAf77Cs6T9ozVAqJeTefHNhZlc53bm5z789a+7yrNsPhMMqEl77/8AJT+TuPfD3N+Is7eaUJOOFpNpx/5+8u/bRbebutj5/wDjle3mva3dazrN299dSsS8srF3P4n07DoO1fKnxNuYkt9M0CM5Om2myTPaSVjI6/RcgY7civ2N/ad/Z2+DOg/GrTv2efhhPqepeLPEN9YJb3VxLELKwS6CMUljCB5pAu5sghQMDmvC/BXwH/Yl+M/7RN7+zjoNx4ptr7TxqG3WZbi2eHUpdOhkklAhEWYFcxkxnLccHrmvmM04TxEqsqXPHmcuXfd7229PyP3Xw/8ApCZNh8BRzF4Wt7GlR9tpCPu0n7kZtcytF6qKWrSbsoq5+N1x1NY9wAH4r79+Afwr+B/jDw2J/Engzx5431Q3kkN2PDiJFaWECttQ+YYZfOmZfm25VR0r21v2AvhD4X+Ofxr+GvxK8Q6nbaP8NNAtPEFndwxoLl4bpopBFNEwx53kv5eBtAk68cV8fS4FxlWnCtBrlfqraN9uye2x/ROP+lbw5gMdiMtxFOp7Wkr8qUZOa9pCl7sYzbXv1IJKSjdO6uj8j1RmYIByeABXS+LfBXjHwBrTeG/HWlXejagiRyNa3sLwShJVDoxRwCAykEccivs34h/B79n7xf8Asx3P7SH7PMOuaMfDeu2uiavp+tXEN0XF9Gz2tzBJDHHtOY2V0I47cV3X7THhX4QeAP2rNW8KfHe48YeOY20nSGs7iC/gGoNNPaxPskklhcPGobZGiqCOBzWUuE5Qpc0pLVxs/s2kpeV/s22PRw30hKWIx/saGHnaEKzqUmoqrGdGVJPVzVNJRqKXxappp9D80cYpcYr9ZfFf7FXwN8V/tEeC/wBnL4QtrukazJp0+reMYtTuLe/k0u3hg+1NBH9nijD3SQKSycgOyp1BriPFX7NfwS8e/DHxj4i+DXhrxr4U1XwTZHVs+JlV7XU9PikWOYqyQReRcIHWQJkqy5A6VvV4BxsYzacXy3WnXlV3bTp5210R5mX/AEvOGK88NCdOrT9qqb96MVyKrN06Tkua7U2rrkUrQak7I/NCiiivhz+qD//U/L+iiiv8vz/u4P0V+Dvxl/Zl1D9jW9/Zk+Ol9r2lXL+K18RQXWj2kNypRLXyPLYSumDkk1Z8R/tY/BXwFo/w/wDhH8ANB1C78F+EfEkHinVm1zyhda3fRMgxJHEWijhEabFTntnvn84aliheU7Vr66HGmMjTjTpqKaSV0tbRd0r9j+c8X9GLhrEYytisbKrUhOdSp7J1H7KM6sXCU4xVve5W0tXy3urOx+xNt+13+zP4a+Knj/4vx+JvGfia68d6PrdhbWF7EsVvpTarbyRqsv75hOsRYRx+Wqqqjd1GK+IPi78bfCnjz9m34SfCHR4p01LwNb6rFfvIoETm9uFlj8og5ICjnIGK+ZYtNMsiQqwDOQo9OeK94l/Zi+IllZR6vqDW0NnJetp/nEvtEyXKWuDhP+ejjH+zk44rsxGe5lmFCdOMFy21svNS/NI+cyXwn4I4OzLD4uriZqupJw55Xu1SnRiklFKypzkkrdE99/uL4Z/th/DLTfi98HvF01pfta+BPBV94d1ALGu5rq5t5okaIbsGMGQEk447V5V+z58fPAfwL0bx7pF/HPNd+J/Dl3pVtNAoO24mZSm7JGE45IrwHwp8Jddv9Zt/D/nxWkMkkaTTjcWCyRvINoCE5IjYDjrjtWfB8Fde1TVrqHSrqKOCC4uoCbjf5kbWzpHh1SPqzSLghcDq20CvSnnWatxqcquubt1Si/wSPicN4a+H8KdfAqrJU5Ro31ltCpOrT6fzSlp2smek2/iWz8V+CdGsI9WtbK60o3CTQXkhhD+dIHEsbYIbIwrLwRtHauf1LxLpWnIIIbv7fMrD5owVgUA843AMx/AL9ayfDvwF+I+ux6TLZLGE1dLt4iN77BZP5cvmCNWx83TGRWjJ8CfGFlodhq2s3MFu2sXcFlZruJHmTfxSYU/J/CCufm68c15/ssa0peys1bX7rfofafXeFqblh/r14Ny9xdL8zeqjeytLd9PQ+ovjH+2PZ6x+2RD+0l8L4Zjb2l3YXVrBdLtdmtY0R0IUnG7BUY9a+rv2WNR/ZO1j9svUPi98Nv8AhJPt15Y63qL6Xe2sUNpo3m2czXD3F0HJkjTcUiARSSVz6V+OOteBPGfgi30fxPJKsJv54/sMkZZWEgVJUcbgMBSRyOjCvvn4p/En9pHxtLd/B3xB8SdRm0i4sIX1PzoYY5Lp5DIEh3W8MLzIWgbIlZenU19TkOfV41KlfFxvJS5krL4mu9/d+56H8/eLfhNlVTBYPKuHq6p0ZUPYSnz1E3RpSSs4RptVXHWycqet9eVtHDWf7QfwJ8Zfs7eCPhb428QeJfCdz4Fk1Az2uhRK8GtLd3TXCy+YJY/KuAreVvkDKFAx0xXY/FP9uD4ReNvib8bPG2jWOpQWfxI8G6XoOmxTKrSw3NksCv57ZwVxEcOOvoK/P65+D3iGKC2vLi5t4IL2ya/tmk3jzYEiSYlQFPIjbJHTIK5zit+3/Zv8eS6ha2bSW6x3MvlLN+82bg0ykLiPLECFm2qCcFeOa8T+3c4nT9jyLotl0i4L8HY/U6fhT4a4bE/2nLFT3k4rmfKuarDESUVy9alOMtW2vh0Wh13gz42+E/D/AOx143+Ad5FcHWfEfiLRdVtpFUGAQ6ek6yh2zkMfNXaMV9j6d+1j+ytr/wC11rv7SnjWLVonttCsLXwzts47j7LqkFrHbm8mhMqBvI2FoVzgsQT92vhVv2c9f1bxpd+FPCV5DOLea4hBnyr5tvIDbggYc/aEwR2B3bcYrW8FfBOys/B3iHxx42Q3Kabpy3NtbxNhG85Mh3bAxsyu0KwJOcZwRSy/MM1o8keRWhtdae6pW+7mf4G/GXB/h/mUcTWdep7TE35lCTjJ+2lQi1qrJP2ME1tbmWzPa/hn8e/g9+zb+0Lo/wAdvhx4g8QeMJLyS+g8Qrf2qWFw9pqETQ3D28yTSfvyHZlY42sAaj+MXxj+Dc3gHW9K8EfEv4i+LL3VcR2Vlq8zW9nawl8yLdjzpPtLeX8gCqE5z2FeAR/syfEGW3tLmKazZLzTP7VTDPkRBo1KkbM7h5q842dfm4pNO/Z61zVW0XR7W6SPU9Yia6jEqOIDbGKGWN0ZVLkkShSNuAQeQAah4/NfYyw6pJReytteydteppT4T8P/AO0MPm8sfUnVp8qbb+JUnKcfaLkWkNUuW2lou6Pnaiuo8S+FL7wuLT7bLFL9rjkdfKJO3yppIHU5A5DxnpkYxg1y9fn1ajKnLkmrNH9i5ZmdDGUI4nDS5oS2Z//V/L+iiiv8vz/u4CtpFEUKgDrWZbxCV8HgCurQwy2wCoNo4NbUoXPOxlblsrGMoLsMdu9b517U5LU6f9pmMRO4qZHI3f3sZxnPfrWTdxrCQIh8rCoY/lzI3anFuOiOapRhVSlJehS/tHUoZcx3MysmMESMCNvTHPGO3pV7SPEmt6FqUWr6XcvHcQv5itncN3+0rZDA9wRg96xGO5i3rTazU2ndM9CpgqM4OE4Jp6NWW3Y6A+ItXkmac3UqFmZvkdkALnc21VICgnsABUDardyKqSTysI/uAyMQvfjnj8KxqKHUl3FDAUYpKMEvkaU2p3k6ok80jiPhAzlgo/2c9PwqJ9R1CSQyyTyszYyS7E8dO/bPFUqKXMzVYemtFFG7Z+JvEOn201nZ3kyRTw/ZnXcSPKPVBn7qn0GKorqmqIEC3UwEZ3IBI/yn1HPB9xVCin7SXczjgaEbuMFr5Itx39/DJ50M8qOc/Mrsp568g9+/rR9vv/JNv58vlkAFN7bSB0G3OMDtxxVSilzs0+r09+VF8apqgIIupvlTyx+8fhP7g5+7/s9PakGqamrpItzMGiXYhEjZVf7q88D2HFUaKOdi+q0/5V9xqalrWq6wltHqc7zrZwi3gDfwRgkhR7ZJP1NZdFFEpNu7HQw9OlBU6UUkui0R/9b8v6UDPApK0LBYi26TPpx2r/MBH/dpUnyq42ENbP8AvQQrcVoxNJC2Uxt/TFUbmSNUMSkN9Kz8npVXsc/sudXZvXeqROQipwgxxWTNdPMNvRfSq1FJybNaWHhDYKKKKk3CiiigAooooAKKKKACiiigAooooAKKKKAP/9f8ybeKNxlvyqBvkYqpplFf5gH/AHaqOoUUUUiwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/0Py/ooor/L8/7uAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2QAA/9sAQwAFAwQEBAMFBAQEBQUFBgcMCAcHBwcPCwsJDBEPEhIRDxERExYcFxMUGhURERghGBodHR8fHxMXIiQiHiQcHh8e/9sAQwEFBQUHBgcOCAgOHhQRFB4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4e/8AAEQgBLAEsAwEiAAIRAQMRAf/EABsAAQACAwEBAAAAAAAAAAAAAAACBgEDBQQH/8QASBAAAQMDAwEFBgIFCAcJAAAAAQACAwQFEQYSITEHE0FRYQgUIjJxgRWRIzNCUrMWOHJ1k6HBwyU2N3N0gqJDRFNUYmOSsdH/xAAcAQEAAwEBAQEBAAAAAAAAAAAAAQIDBAUGBwj/xAA0EQACAQMCBAMFBwUBAAAAAAAAAQIDBBEhMQUSQVETYXEUIoHR8DJikaGxweEGI0JS8XL/2gAMAwEAAhEDEQA/APn6Ii/Pz+vgiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAmFkDzQnyQGEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBEWQEBhFIBZwEGSOEwpIhGSOFhTTAQZIIpYWMISYRFkDKAwpBvmptZgZKi53gEIznYwT4KKIhIREQBERAEREAREQBERAEREAREQBERAEREAREQBZasLLQgJYQDCy3qp7MjhTgq3ggAsgKQapNblMFXIhhMLcGJsU4K8xpwsbVvLFEswmApGnCxhbCFhrC44CjBdSNYaSeFvZEGt3OXoZC2Jm5/VeWeTceOinGCinz6LYjI/JIHRakRVNksBERAEREAREQBERAEREAREQBERAEREAREQBERAEREACmAotUghBlq3wnwK1NC3RDxVkZSZuMOeQFhsfovXREE7XdF65KIgbmjhaKOTjlW5XhnNbEVIQ8LoR0/mtopjsJwrKJk7hI5JiK1uZhdV9PgLXHRvlk2taSVHKXjXWMs5jIHSOw0Fe5tPHSxb5MbsdF1X08Nug3SYMpHA8lX66Z8ry4lHHkIp1XcPT7J56qZ0rjzwvOei2OCgsWejBJLCNaLJHKwoNEEREAREQBERAEREAREQBERAEREAREQBERAEREARECAk3zUmrDeik1EVZNgXojatMY5Xph6q8TCbPTTtwVYbQWvHdSjIPiuLSt5XZt7MEYXRTWp4948xZ0JrU6M7mjLT0Ky2gPcuO3xVm0+1tU1tLKM7jhpPgV2WaaqHPdSRwSOmLwAwNO78l3Rt+ZZR8tW4sqMuSo8NfofO2WySZ4Y1uSrBT6Yno7cKyZ1NQwu/71WyiKP/lHzPP9EFWytFt0rC5sUcFfdvFzhugpz9P23D14Hqvm2pa6tula+rr6mWpnPG+R2SB5DyHoOEnThR31Yt7u44i/7fuw7vd+i7eb/Bo89yt2nppXB+sWmUn5ha5jF/8ALO7Hrt+yrF6ttTa651LU92521r2SRP3xyscMtex3i0jof8QV6alvJW/Ujv8ARNgifzIygeSfEMdPKWD8ufuuKXLJN4xj1Pp7ZVbepCPO5KWmqWmjeVhLtjXO6+NceOq1uW6TqtLui5We9Eg7ooqfgonqqmqMIiIAiIgCIiAIiIAiIgCIiAIiIAiIgLVoDQGotbtrXWFlI4URYJu/n7v584xwc/KVZ5OwTtEYwubSWyQj9ltaMn82hWL2YyRpDXxBIIpGEEHH/ZTL4vR3a607op4LpXwytALXsqXtIPmCCvQ8OhTownOLblnr2fofHRu+LXvEbqhbVYQjScUsxbzzRzupI36ksF505c3W6+W6ehqQNwZIOHN/eaRw4eoK5q+9VVZJ2leztXXK7YnvmnJXOFRtG54aGkk/0ozz5luV8r0JoXUWs6iZtmpWCng/X1c7+7hi+rvE45wASs61ricVS1Ulldzu4Zx5Ttqs7/FOdKTjPX3c9Gs9HnTqVlB1X1Ko7ENRPo5p7NfNPXyWAZkp6KqzIPQZGM/UhfO7Taqu43+lskbRDV1FS2lAmy0MkLtuHcZGD14WVS2q02lJYyehZ8asb2E50Kqkob916p6nkHRWPQujb9rKsqKWxU8Ur6aMSSullEbWgnAGT4kqxUfY3qyW93K3TTWykp7a5ram4TzltPuc0ODWkjLjhwzwMKXZzp3WUWvrvp/RuoqSnrqSFwmqo5iIZow5o+E7XZ5cMcccralaTU14kXhvHmeZe8ftqltUdnXhzxipZeXFJ41ePJ7b6rQotRTT0dbPR1UZingkdFKw9WuaSCPzC2QldXR2mrrrHVjrNR1MHv8AJ3sjpKmRwa4tOXEkAkknnorNp3ssv9wpnVlbXWqy0neviimr6jZ35a4tJYMZLcjgnGVWnb1KmsI6G91xiztPcuKqUkk2vXOy31w+5VaQ8rvW2QAj4QVu1poe+6Mmg/ExBNS1HENVTuLo3nGccgEHHOD18MrXYKWSpkGOG+JPgtFTnCXLJYZwzu7e6oePSmpRfVF10rHLV1EcEFMJHvIa1oHUr67JcoYnSUbb1TmZtJ3DWDODLtxy/GOufFfMnXGHS9iiZTHFzuEW5rvGGA8bvRz+ceTefFcBt1cKY/F+0vVp1lQWOp8DecNnxWfibQWUvPu9emnxOlqRwjlc18IBHCpFykYS7DQFbqGY32pgtjXsFRPI2OJzzxknAyj+zLUVRda+lfNQUlPRODZq2eUth3FodhpxknBGemFyzpzq6wWT3bW7t7H3Lmai0s69s40+J84EPvVU2AOEYcfieejG9XOP0GSvFfattbcZZ42lkWAyFh/YjaNrB+QH3yrJDpm7V2qarS1mbFcawSOjkmhf+iLGkZduPRmcEn6Bdq4djd8i309Nf9OVtzYObfFWYnJ8gHAc/XC5vZ6sovlie8uMWFvVi61VJtaej6vsnpvjY+WPWl3RWjVmjL1puyWm7XVsMUd0DzFDl3ex7cZDwQMHnzK6mk+yrUl/tDbzNNb7La5P1dTcpu6Enq0Yzj1OM+GVzK2qynyKOp68uNWFKgridVKDeE+7Tw0u706FBUSr/rPsp1HpyxuvjKm3Xi1M/WVNvmLxGM4yQR09RnHjhcLQ2jbrrCW4x2qWkjdb6X3mXv3luWc8NwDk8eOFDtqsZ8jjqa0uNWFW2ldQqp046N9ntr1XxK4i+jad7HtQ3K301ZcbpZbD72wPpoLjUbJpAeh2AcZ8uvoq1rzR180Xd2229wMa6Ru+GaJ26OZucEtPHTxBAISdtVhDnlHQi245w+6ru3o1U59vTfHR48sm5ugtTO0KdaCij/Bxzv74d5s3bd+zrtzx/gqwr5HQ64PYs+5tvoGlBVdy6g747i7vMdNvy7ucbseOFr0f2Y3nU9iju9Hd7DTQyPewR1dWY5AWnBJG08LSVu5OKpxe2f59DkocYhQhVqXtaHKqjims6doy+93xoUdF9WpOwfVdVIY6a86amcBkiOtc4geeAxfPbfYLpctSfyftdP7/AF5nfC1sBy1xaSC4OPG3jO44GFnUtatPHNHfY67TjvD7tTdGqnyLMumF3eTlovq7ewrUIIppdRaZiuRGRQuq3d7ny+Xr9l851JY7pp28T2i80j6SshI3Mccgg9HAjgg+BCVbarSWZxwibDjnD+ITdO2qqUlrjy7rO681oc5ERYHqBERAEREAREQH3P2Zf9Ttf/8ABs/hTL4VF+qZ/RC+9+ytTS1unNcUcG0yzwRRM3HA3OZKBk/UqvUvs+66LmNqp7NSwgDfK6qc4NHngN5XqTt6ta3pckc7/qfA2fGLHh3GeIK6qqGXTxnriHQ7XYqPduwXtBq5uInslY0noSKcD/7cFQ+zvTWt9VWe4WmxVLqax942SvfPUd1Tb2jjcepOOSB6Z6BXbtPvmndIdmcXZlpe4R3KplfvudXEQW/NucCRxucQBtBOGjlbdA0kmsvZ8rtG6eqoY77TVpnnpXSBhqYzJu6+RGBnploBwtvDjKcaOcuMXs932OCN3Wo21fiPIoxrVo4c1lRgsJVGtO2mcdGS7JtAHTnaHarhT6+0nPIyUxyUtHV7pJ2lpBYB+1549FwNWQxwe1CWRNDWm/0ryB5uMZJ+5JP3XR7Meza76V1paNQayfS2Slgq2tponzsfNVTu+BjGtaTxl2SfIfdeTW8b4/alaHtILr1ROGfEERYKSjy0Irl5feWgoV1W4rXkq6rf2JLmSSWklosaPGfPGcHq9qq/1dXrsadD3MoKGCOUxDhskrxkvcPEhu0DPTlS9kYY7RLiAMD8Kf8AxY1xPaY47Yrp/uKf+GF2/ZG/2i3H+qn/AMWNVjJy4lr3ZtWowo/0XiCxmmn8Xhtnh9nHntqiH/tVf+K4Haxeay+dol5lrJC9lPVyU1PGflijjcWhrR0HTJ8ySu/7OH+2uL/dVarWqaXfrm/Pk4aLnUZ/tXLKTfsiS/2Z30YU1/UFSpJaqlDHxlLJ9RsLX3b2ZpWVzy/8PuAbA53VjRI3A+we4fRVTTb6WrvMFtLiyhjDp6yQde5jaXv/ADAwPUhWe2ztHsw3t8PAbcNo/tIl830ZM+SHUEEeXVMtmmETR1dh8bngeuxrz9AVvVliVP8A8r9zyeH0HKletaJVZJeWeXX4Zyeq73you92qblUYa+d+4MHRjejWD0AwB9FrFZ+ixnxXAjm4yDkHxXro4qmqidLCz9Az55nnbGz6uPH26+i4lOUn5n1DtKVCmloorCX7Fr7P6onXthaD1uEI/wCsK2e0PepqzVklhLyymoo2P7sfK+R43FxHicEAKhdn0sTe0PT0cUhlP4nBmTGAfjHyjrj1PPoF1vaEmMfa3dgDj9HB/CauuNRxtZeq/Q+eqWkK3H6Ta2pya9eZLP5lk7KZHWDsj1rqajwy4MHcRSAcsAYMEfeTP2C+JGaWOf3qOV7Khru8bMHHeH5zu3dc55yvrnYlfbTWW++aGvlS2lp73FiGZxADZdu3GTxk/CR5luFyajsQ1tFcHxVX4dT29hPeXF9U0RNZ4vx83TnGPv4qtWnOtRpukspfk8mthe2vDeIXkb6ShKbTTf8AlHlSSXfDysIsPtIV01y0FoK41JBmqqd00h83OijJ/vKqtu0FrXVOmbdcb7eqK2WSnhEdA+8Vexoj6jY3B4PgTyQBjjCtHtKfh/8AITQrLTN7xQNhlZTSkY7yNscYa77gZ+693a5pq7dpdm03f9E9zcrdBR9y+jbM1joJOM8OIGRjaR1GB4Lor0uerUbzJpR0XX/h5PCr92vDrSEXGlGU6vvyWeTEpYSzhJy217M6XYxpRthseq7edVWK+0VXQlzqa3z953btrwXOHhkHHrj0VS9kJ4Zqa+yOG4NtTHEeeHq0dh2j5dIG/wBvvFZSt1BcLa57bdDIJHwwsyNzyOMlzxgeQ8fCqeySCNQahB6i0Af9avCOKlBYx9rQ5rioqtnxaSqeIn4T5sJJ9MpLTGmMrfGT5RqO7VmoL5V3e6SuqKmqlL3OfztBJw0eQA4AHTC+udp8sl19nHQ94rXmasjmEPeu5cW7ZG8n17tv5L4o3wX2nW/81bRv/Gj/AD151q3KNbPb90faccpQo1uHqmsYqJLHRcstPQjB/NFm/rf/ADwvjdLSy1lXFS01OZ6iZ7Y4o2Ny57icAD1JX2SD+aNN/W/+eF1fZ90NW0Wmp+0CK3RXO7SRvbZKR8jWMaclplc48Ak5HmGg+J42nbyuJ04r/VZ9Dy7XjNLhFrfV57uvNRTeMyeMa9F1b6JM5GqJqbsm0J/JC1yRHVt5iEl4q4sZpoiOImkdOMgf8zvEL3+y7bZxp3WF6tUULrxHA2koTI4NaxxY53JPABdsz/RVfu3Y52q3a6VNzuNvp6isqpDJNI6vjy5x+/A8APAYC9fYjc6GwXrU/Z5q2VlFDdWuo5JDINkc7dzC3d0GQ7g9MtHmtKTlG5i5xcYrKWdOn6nFexoVeCV4W1aNatJxnUcWpN4ks6J/ZS0S00Xmc2XsU7RJqp1XMy2yVL394+Z1zaXufnJdu65zzlWD2h7ZXx6G0XcL66F9+hjfRVskcgfvw3cCSOvQnPm4ri1fYP2gQ3J1NSwUVXS7sR1gq2sY5vg4tPxDjwwfuqr2k6Zt+lLxT2mj1BDeKltODXdy34IJs8sBzzx9x49VlUi6VKa8NrPd+fpqehZ1qfEOIW0o3kKjhlpQg1pjDTfM+Va7NLVIqyIi8o++CIiAIiIAiIgJxSzRZ7qaWPPXY8tz+SzJUVEjS2Sone09Q6VxH95WtFOWVdODeWtQAAMAYCnBLLBM2aCWSGVvyvjeWuH0I5CgsgE9AoWhLSawzbVVdXVzCarq6iolbwHyyue4fQkkha3SSOk7x0kjn/vlxLvz6p3bvRTbTTua1zYZHNe/u2lrSQ537o8zyOOvKtlsoo04LCSSIPe97y+R73uPUucSfzKnBJLG4mKSRhPGWOLSR9ln3SqAyaafHHJjPi4tHh+8CPqMdVvfSTUcz46yGWnkjID2SsLHNJ6Ag9ExLco50scuV6GygY9ju9Ej4yP2muIP5hbKqsJy1hPqfNYggq6yrpqOCGXfUkCLEbjuBONwABJAwckA9Ct1zss1NXxUVHLLcZ5d2GRUUzHHaSMhr2guHB5A8DlaJS5dNjklUoqrib1x+S7vZfE8LZ5dhj72TYTks3Haft0W6hq56OqiqqSeSCoheHxyRu2uY4dCCtVHRVtWJTS0dTUCEZlMULn7B5uwOOh6qNPDPOP0EMsvxBvwMLuTnA48Tg/kVVc25tJUmpRePPbr39Tvyanq5XGSS3WN055M/wCGRbyfM8bc/ZeC4XOur5GvrauWct4YHHDWD/0tGA37ALzU1FXz0klXT0NXLTR/rJo4XOY3HXLgMBYpqWuqnMZS0dTUPkDjG2KJzi8N+bGBzjx8lo51JaPJy07a0pNyiopr00+RkSuaQ5riCOQQcEKMkz3uLpHue49S4kn8yttZRSROqH0z3VtLTlgkqoo3d20uAOCSOOSRz4grzzU1VC6RktNPG6Noe8PjILWnGCcjgHIwfHIVHzLQ6ISpSxJNfv0+PVfid7Q2k7zrGvqaCytp3zwQd85k0oZuGQNoz4/3cK003ZL2m3OeO2VVFU01LuAdJU1odDGP3tocc48gFQNPUstdfKSlhqJaaSSTAmiY9zo+pLgGfF4eH3wF39S3LUUEkVtp9W3y5xyxnvKV80zZoiCQWSR7iRxyPQrqo+F4fNOLfo1r8DwuI+3e1+Fb1YLKyuaEm4+eU8dOuCze0Td7Wamw6Os1Q2pptPUncyytIIMhDW7cjjIDOfV2PBfL6OuraIuNFW1VKX/MYJnR7vrtIyvfcrFVUTYWvlp3VMrWH3Nu8VLS4ZwYnNB48xx5ZXOpqOsqpIo6akqJ3zEiJscTnGQjqGgDnHjhY3E51Krm1hnfwa0tbSwjbxlzRWct9W2238Xlmvvpu+dMJpRK75n94dzvqc5KjHJJGSY5JIyRgljy3P5Lb7nV9wJ/dKjuTL3Ik7p20yfuZxjd6dVGanqITKJqeaMwv7uXewt2P5+F2eh4PB54Kw949ZOk9Fg1KRkkMYjMkhjHRhcdo+g6Lq1FhnprK2uq5fdKl0hDKOpidFLKzAw+PI+Pk4wvF+G3H3ySj/D6v3mJpfJD3Dt7GgZJLcZAxzkqXCcdClO6t6qbjJaZ/Lf/ALsefvJO67rvJO7znZuO3P06KcdRUxt2x1M7GjoGyuAH2BWHQTtDy6GVoYGueSwjaHfKT5A5GPPKtVptFvoNPOu9wdFO+qo3uip6unkijJ3cNjm4/S4GRjgg/VWpwlN6dDC8u6FvBOSzl4SSzlv+OrwvMq/vdZ/5yq/tnf8A6tLiXFxcS4u6knOV6YqGtnpZqyCiqZKWInvJmQudHH6F2MDw6rEdFWyU7allHUvgc5zWyNicWktGXAHGCQASfIKmJM6oyoxzhpdOn4E2XS5spfdWXOvbT4x3Tal4Zjy25wvIAAMBdO0Wh1ZUOhqqhtvDqR9TDJUMcGSADI5/dOD8QyBjyyvKy31slPPUw0lRPTQOLZJ4onOibjzcBgDx581LjNrLM4VreE5Ri0npnpvtrszzItstLUxU0VTLTTRwTZ7qV0ZDJMddpPBx6LUqYwdMZKWqYREQkIiIAiIgCIgGThATjZnk9FPgdE6BRUlNzO5WCz3mkpbPQQyd6aiivbK/YGcSR7WAgOzw4FniOc+irwGVNg2q8JuLyjnubaFeKjIvGor3ZZ7DVUlBU1k00rGRDvKbuxtFXLUF2dx/8QNx5gnoubVakppZ53MrbrSiS10tKe5YxwkfFGGuEjXHluRw4HI8lW95K0SDDlrK5m3n66/M8+34Lb04uLy9W9cdceWP8V0LNb77Qwz2CY1NVC6it0tFUbIGvDS50pacOOJGESAObwcAjyULxeqGbVNtuVLJUvjpe4M8h3tDiyTce7Y57ixu3ADd3XJwAcKtIqePLGDoXCaCqOpl5w106tvt5vHz1LzYrvDWXCnho31kdTHqJ9ziiibj3qNzmnaTuGHtax2Ac53EDk8tO3ej07e7jDdo6mmeLpT1QjZEHFrWmXLSARghswOPQjgqjtcQQQSCOQR1CyXEuJcS4k5JJ5JV1cyWH1Rzz4JSnzwb9yS265znft6rOujxorlou86dszaKSp99NVSzvkdLE1/xgEbWhu/bsezc1wIyDg5I4WLBqS30Gmqame+qbW07XQhkcfwlj6qGYvD88YETm7cckjnCp2VnKhXM4rC+vrBafBKFSTlNtttPftzabbe89Cw/jVKK/VEwE3dXWKdlO3HQvqGSN3DPHwtPnyvbdL7aJbLUtppqySsqbXR250ckAa1vcuY50m/ccg7MAYzzz61HKxlQriSTX11+Zq+E0HKMsvRp/hjGdPuo7mj7lSW2vq3VznthqaGamyIy9uX4xuaC0lvHgQc46jIPvodSUkWrLXeXy1bRRWyOB7g3Mj5WU7o+DnoSR8Weg6Kp5WFEa8opJdNS9bhdGtOc5ZzJcr9HoyzW/UcFNctJ1sgqJnWeJrKnJ+J2J5H/AAknn4XjGcc8KbH0lU+x2ezVplbQTy1ElTUltIDvkjJA3P4w1mTzzk4HHNWTCKu8Yf1t8kVnwqlnmg8PXzWvN08ueWNVv5Isl7u9JMNWUsUsj23K6NnpntGWFjZZiXdfEPaR5r3ao1FaKp1dLbZa6R9fdYK57ZYRGYWxMe3AOXBznF+c4wMc56Kmop9olhr66/NkLhFDMXl6fnpFa6fci/UuGsdR2242d9DQ7pXzXI1z5DSmEsJa5pBy9257twJLcN+EYHPGKTUNudVzipfMyKosVPbnPkg71okjEeS5gcC4fAcEHg4OD0VQRS7mblzFIcEt40lSTenXrun2x0XT1LRdb5bqxmoIWOqGsrKSjgpXPi5eafYPjAPw7g0nxx0XtvWqLbU6crqSEyT1VfFSxv7yl2OjMRadzn7y1xw3aNrW8OOfWlIo9pnr5/z82SuC26cd/daf4KKXT7kX6ouuj9UW2022j977yaehNQWQOpt4eJQfha8PAaDn4t7XenXA02TUFrpNO2+Gd03vlvp6yFsYp9xkMzZGtxJuw1g7zJaWk5BwTnioIpVzNYXb+Pkis+B205Sk2/eeXt97TbZ80vPXctlHe7RBp2kjM1aa+ltFVbxD3A2PdO+Q7t+7hrQ/kYySOF6NHaottpt9GavvJZ6F1Q5kDqbeHiQfK14eA0Ho7e13p1wKWiRuZxaa+tvkiavBLerCUJN4k2+nXmyttvefnrud+oHu3Z7TUk1TA6Wa5CpiiZUNe4RiDaXFoJLPiOMHB/JcBEWU5c2DvtqHgqWXltt9twiIqHQEREAREQBSjBLwAorcz4OfFSiG8ImY3Y8FqLSOoW8kkcI0jkFTgyUmjSOAsE5WXjDsKKgul1JMUZfBTaMLXIcuKBbkURFBcIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgMt+YLY7qteCOoIWxpDh6qUVfclE/bwVsaMnhaNpUmksGcqUyjXYnM3kfRQAUXSuJJ4UC5x8VGSVF4NjngDA6rUiKC6WAiIhIREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBTaC1gOOqxHjdytrH8FruiIrJkWnPBWs8E+iluaOQcqCEolvd5qJJPU5REJwEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAFna7GcI04Iypjz8PNCGzWslxPUrHiUQkIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgP/Z" alt="Darin Organize">
+    <p class="gate-label">ກະລຸນາໃສ່ລະຫັດເພື່ອເຂົ້າໃຊ້ງານ</p>
+    <input type="password" id="gateInput" inputmode="numeric" placeholder="ລະຫັດ" maxlength="10">
+    <button class="gate-btn" onclick="checkGate()">ເຂົ້າສູ່ລະບົບ</button>
+    <div class="gate-msg" id="gateMsg"></div>
+  </div>
+</div>
+
+<div id="mainContainer" style="display:none;">
 
 <div class="lang-switch">
   <div class="lang-btn active" data-lang="lo" onclick="setLang('lo')">ລາວ</div>
@@ -179,7 +236,7 @@
     </div>
     <div class="hero-eyebrow" data-lo="ດູແລທ່ານ ຄືກັບຄົນໃນຄອບຄົວ" data-en="We care for you like family"></div>
     <h1>Darin Organize</h1>
-    <p data-lo="ບໍລິການຈັດງານແຕ່ງດອງ ແລະ ສອນເຕັ້ນ" data-en="Wedding Planning &amp; Dance Studio"></p>
+    <p data-lo="ບໍລິການຈັດງານແຕ່ງດອງ" data-en="Wedding Planning Services"></p>
   </div>
   <div class="menu-wrap">
     <div class="menu-card" onclick="showView('checklist')">
@@ -194,6 +251,13 @@
       <div class="txt">
         <h3 data-lo="ລາຍການເພງ" data-en="Song List"></h3>
         <p data-lo="ເພງສອນເຕັ້ນ ກົດເປີດ YouTube ໄດ້ເລີຍ" data-en="Dance class songs, tap to open on YouTube"></p>
+      </div>
+    </div>
+    <div class="menu-card" onclick="showView('vendors')">
+      <div class="ic">🏬</div>
+      <div class="txt">
+        <h3 data-lo="ລາຍການເພີ່ມເຕີມ" data-en="More"></h3>
+        <p data-lo="ສະຖານທີ່ຈັດງານ, ຊ່າງແຕ່ງໜ້າ, ຊ່າງພາບ ແລະ ອື່ນໆ" data-en="Venues, makeup artists, photographers &amp; more"></p>
       </div>
     </div>
   </div>
@@ -263,13 +327,75 @@
     <a class="song-card" href="https://youtu.be/PEM0Vs8jf1w" target="_blank" rel="noopener"><span class="play">▶</span><span class="name">Golden Hour</span></a>
     <a class="song-card" href="https://youtu.be/f5-IY_Ja1RM" target="_blank" rel="noopener"><span class="play">▶</span><span class="name">Her</span></a>
     <a class="song-card" href="https://youtu.be/uJRImJQmfo0" target="_blank" rel="noopener"><span class="play">▶</span><span class="name">Bridgerton "Enchanted"</span></a>
+    <a class="song-card" href="https://www.youtube.com/watch?v=8974KYh0acU" target="_blank" rel="noopener"><span class="play">▶</span><span class="name">ຮັກສຸດທ້າຍ</span></a>
+    <a class="song-card" href="https://www.youtube.com/watch?v=F08mjkNmqMI" target="_blank" rel="noopener"><span class="play">▶</span><span class="name">ຈາລຶກໄວ້</span></a>
+    <a class="song-card" href="https://www.youtube.com/watch?v=vYV6qyLXQ58" target="_blank" rel="noopener"><span class="play">▶</span><span class="name">Young and Beautiful - Lana Del Rey</span></a>
+    <a class="song-card" href="https://www.youtube.com/watch?v=LwjLjm0sjsE" target="_blank" rel="noopener"><span class="play">▶</span><span class="name">Indila - Love Story</span></a>
+    <a class="song-card" href="https://www.youtube.com/watch?v=W5vLZ_SHhW8" target="_blank" rel="noopener"><span class="play">▶</span><span class="name">Snowman</span></a>
+    <a class="song-card" href="https://www.youtube.com/watch?v=SbKS0F7dTDQ" target="_blank" rel="noopener"><span class="play">▶</span><span class="name">Love Me Like You Do</span></a>
   </div>
 </div>
 
+<!-- ================= VENDORS ================= -->
+<div class="view" id="view-vendors">
+  <div class="hero" style="padding-bottom:34px;">
+    <div class="back-chip" onclick="showView('home')">←</div>
+    <div class="hero-eyebrow" data-lo="ຮ້ານແນະນຳ" data-en="Recommended vendors"></div>
+    <h1 data-lo="ລາຍການເພີ່ມເຕີມ" data-en="More"></h1>
+    <p data-lo="ກົດແຕ່ລະໝວດເພື່ອເບິ່ງລາຍຊື່ຮ້ານແນະນຳ" data-en="Tap a category to see recommended shops"></p>
+  </div>
+  <div class="timeline" id="vendorTimeline" style="padding-top:20px;"></div>
+</div>
+
 <script>
+
+const GATE_CODE = "8979";
+
+function playSuccessChime(){
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    const notes = [
+      { freq: 659.25, start: 0,    dur: 0.12 },
+      { freq: 987.77, start: 0.10, dur: 0.22 }
+    ];
+    notes.forEach(n => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(n.freq, now + n.start);
+      gain.gain.setValueAtTime(0.0001, now + n.start);
+      gain.gain.exponentialRampToValueAtTime(0.28, now + n.start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + n.start + n.dur);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + n.start);
+      osc.stop(now + n.start + n.dur + 0.02);
+    });
+  }catch(e){}
+}
+
+function checkGate(){
+  const input = document.getElementById('gateInput');
+  const msg = document.getElementById('gateMsg');
+  if(input.value.trim() === GATE_CODE){
+    playSuccessChime();
+    document.getElementById('gateScreen').style.display = 'none';
+    document.getElementById('mainContainer').style.display = 'block';
+  } else {
+    msg.textContent = "ລະຫັດບໍ່ຖືກຕ້ອງ";
+    input.value = '';
+    input.focus();
+  }
+}
+document.getElementById('gateInput').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') checkGate();
+});
+
 function showView(name){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('view-'+name).classList.add('active');
+  if(name === 'vendors') renderVendors();
   window.scrollTo(0,0);
 }
 
@@ -282,6 +408,7 @@ function setLang(lang){
   });
   try{ localStorage.setItem('site_lang', lang); }catch(e){}
   renderTimeline();
+  renderVendors();
 }
 
 const ICONS = {
@@ -386,6 +513,7 @@ const DATA = [
           { lo: "ແຈ້ງເຈົ້າພາບສຳລັບຖ່າຍຮູບລວມ", en: "Notify hosts about the group photo" },
           { lo: "ວົງດົນຕີ ຖ້າຫາກຕ້ອງການນຳເຂົ້າເອງ", en: "Live band, if bringing your own" },
           { lo: "ຊຸດສຳລັບງານລ້ຽງຕອນແລງ", en: "Outfit for the evening reception" },
+          { lo: "ເກີບສຳລັບງານແລງ", en: "Shoes for the evening" },
           { lo: "ຊຸດລາຕີ", en: "Evening gown / cocktail outfit" },
           { lo: "ຊຸດອັບເຕີ້ປາຕີ້", en: "After-party outfit" },
           { lo: "DJ ສຳລັບຊ່ວງ After party", en: "DJ for the after-party" }
@@ -411,6 +539,147 @@ const DATA = [
     ]
   }
 ];
+
+const VENDOR_ICONS = {
+  venue: '🏛️', makeup: '💄', photo: '📷', prewedding: '🌸',
+  groom: '🤵', bride: '👰', jewelry: '💍', tray: '🪷'
+};
+
+const VENDOR_CATEGORIES = [
+  { key:"venue", title:{lo:"ສະຖານທີ່ຈັດງານແຕ່ງດອງ", en:"Wedding Venues"}, vendors:[
+    { name:"Saint Phila", fb:"https://www.facebook.com/SaintPhila" },
+    { name:"Asean Mall", fb:"https://www.facebook.com/AseanMall" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #1", fb:"https://www.facebook.com/profile.php?id=100057522315003" },
+    { name:"Crowne Plaza Vientiane", fb:"https://www.facebook.com/crowneplazavientiane" },
+    { name:"Holiday Inn Vientiane", fb:"https://www.facebook.com/holidayinnvientiane" },
+    { name:"Landmark Mekong Riverside Hotel", fb:"https://www.facebook.com/LandmarkMekongRiversideHotel" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #2", fb:"https://www.facebook.com/profile.php?id=100063670906286" },
+    { name:"Vangxay Daokham", fb:"https://www.facebook.com/Vanglaodaokham" },
+    { name:"Asha's Tables", fb:"https://www.facebook.com/ashastables" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #3", fb:"https://www.facebook.com/profile.php?id=61571511575849" },
+  ]},
+  { key:"makeup", title:{lo:"ຊ່າງແຕ່ງໜ້າ", en:"Makeup Artists"}, vendors:[
+    { name:"Alex Soundala", fb:"https://www.facebook.com/alex.soundala" },
+    { name:"Khavy", fb:"https://www.facebook.com/khavy1987" },
+    { name:"Bay Baramy Sirivanh (Luang Prabang)", fb:"https://www.facebook.com/bay.baramy.sirivanh.luangprabang" },
+    { name:"Sam Philavong", fb:"https://www.facebook.com/sam.philavong" },
+    { name:"Ae Maitee Makeup", fb:"https://www.facebook.com/ae.maitee.make.up" },
+    { name:"Bank VK", fb:"https://www.facebook.com/bank.vk.2025" },
+    { name:"Aoy Duangluangsy", fb:"https://www.facebook.com/aoy.duangluangsy" },
+    { name:"Lina Vongphachan", fb:"https://www.facebook.com/lina.vongphachan" },
+    { name:"Jay Xaypanyar", fb:"https://www.facebook.com/jay.xaypanyar.3" },
+    { name:"Saykeo Sayfon Makeup", fb:"https://www.facebook.com/saykeo.sayfon.make.up" },
+    { name:"Philavone Phongpadith", fb:"https://www.facebook.com/philavone.phongpadith" },
+    { name:"Sith PML", fb:"https://www.facebook.com/sith.pml.2025" },
+    { name:"Minui", fb:"https://www.facebook.com/minui.minui28" },
+    { name:"Terry", fb:"https://www.facebook.com/terry.nisaihan" },
+    { name:"Thay Noy", fb:"https://www.facebook.com/thay.noy.1" },
+  ]},
+  { key:"photo", title:{lo:"ຊ່າງພາບ ແລະ ວິດີໂອ", en:"Photographers & Videographers"}, vendors:[
+    { name:"Thammavong John", fb:"https://www.facebook.com/thammavong.john" },
+    { name:"AD Studio (Addie Chounlamonty)", fb:"https://www.facebook.com/ADStudio.AddieChounlamonty" },
+    { name:"Dotia Fotografie", fb:"https://www.facebook.com/dotiafotografie" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #1", fb:"https://www.facebook.com/profile.php?id=61550484397975" },
+    { name:"Rose Wedding Lao", fb:"https://www.facebook.com/RoseWeddingLao" },
+    { name:"Khamlar Cameraman", fb:"https://www.facebook.com/khamlar.cameraman.slk" },
+    { name:"Phaenglove Slienkham", fb:"https://www.facebook.com/phaenglove.slienkham" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #2", fb:"https://www.facebook.com/profile.php?id=100091342691712" },
+    { name:"Yes Pleased", fb:"https://www.facebook.com/Yespleased" },
+    { name:"Toui Nouiouilouidk", fb:"https://www.facebook.com/toui.nouiouilouidk" },
+    { name:"Apaesithat", fb:"https://www.facebook.com/Apaesithat" },
+    { name:"The Moment Wedding Laos", fb:"https://www.facebook.com/TheMomentWeddingLaos" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #3", fb:"https://www.facebook.com/profile.php?id=100047060409411" },
+  ]},
+  { key:"prewedding", title:{lo:"ສະຖານທີ່ຖ່າຍພຣີເວດດິ້ງ", en:"Pre-wedding Photo Locations"}, vendors:[
+    { name:"ຜູ້ໃຫ້ບໍລິການ #1", fb:"https://www.facebook.com/profile.php?id=100054360527765" },
+    { name:"Sea Studio Laos", fb:"https://www.facebook.com/SeaStudioLaos" },
+    { name:"BS Wedding Studio", fb:"https://www.facebook.com/bsweddingstudio" },
+    { name:"The Move by ELITRY", fb:"https://www.facebook.com/TheMoveByELITRY" },
+  ]},
+  { key:"groom", title:{lo:"ຮ້ານຕັດຊຸດເຈົ້າບ່າວ", en:"Groom's Suit Tailors"}, vendors:[
+    { name:"The Move by ELITRY", fb:"https://www.facebook.com/TheMoveByELITRY" },
+    { name:"Classical Tailor VTE", fb:"https://www.facebook.com/classicaltailorVTE" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #1", fb:"https://www.facebook.com/profile.php?id=61577568704421" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #2", fb:"https://www.facebook.com/profile.php?id=100095312360915" },
+  ]},
+  { key:"bride", title:{lo:"ຮ້ານຕັດຊຸດເຈົ້າສາວ", en:"Bride's Dress Shops"}, vendors:[
+    { name:"Nanthida Silk", fb:"https://www.facebook.com/NanthidaSilk" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #1", fb:"https://www.facebook.com/profile.php?id=100077108901691" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #2", fb:"https://www.facebook.com/profile.php?id=100071559151234" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #3", fb:"https://www.facebook.com/profile.php?id=100064957835632" },
+    { name:"Meenoy Lao Silk", fb:"https://www.facebook.com/Meenoylaosilk2" },
+  ]},
+  { key:"jewelry", title:{lo:"ຮ້ານເຄື່ອງປະດັບ", en:"Jewelry Shops"}, vendors:[
+    { name:"ຜູ້ໃຫ້ບໍລິການ #1", fb:"https://www.facebook.com/profile.php?id=61550260756394" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #2", fb:"https://www.facebook.com/profile.php?id=100083001086851" },
+  ]},
+  { key:"tray", title:{lo:"ຮ້ານພາຂວັນ", en:"Offering Tray (Pha Khuan) Shops"}, vendors:[
+    { name:"Phichith Wedding", fb:"https://www.facebook.com/phichithwedding" },
+    { name:"ຜູ້ໃຫ້ບໍລິການ #1", fb:"https://www.facebook.com/profile.php?id=100085134491151" },
+    { name:"Sell Online Everything", fb:"https://www.facebook.com/SellonlineEverthing" },
+    { name:"Kuang Sangkaphan", fb:"https://www.facebook.com/Kuengsangkaphan" },
+  ]},
+];
+// Each vendor: { name, img (optional URL or data URI), fb (Facebook/social link), note (price or contact info) }
+// Example of how to add one later:
+// VENDOR_CATEGORIES[1].vendors.push({ name:"ຊື່ຊ່າງ", fb:"https://facebook.com/...", note:"ລາຄາເລີ່ມຕົ້ນ 500,000 ກີບ", img:"" });
+
+function renderVendors(){
+  const timeline = document.getElementById('vendorTimeline');
+  const prevOpen = new Set();
+  document.querySelectorAll('#view-vendors .card.open').forEach(c => prevOpen.add(c.dataset.catKey));
+  timeline.innerHTML = '';
+
+  VENDOR_CATEGORIES.forEach((cat, idx) => {
+    const titleTxt = currentLang === 'en' ? cat.title.en : cat.title.lo;
+    const card = document.createElement('div');
+    card.className = 'card' + (prevOpen.has(cat.key) ? ' open' : '');
+    card.dataset.catKey = cat.key;
+
+    const countTxt = cat.vendors.length
+      ? (currentLang === 'en' ? cat.vendors.length + ' vendors' : cat.vendors.length + ' ຮ້ານ')
+      : (currentLang === 'en' ? 'Coming soon' : 'ຍັງບໍ່ມີລາຍຊື່');
+
+    const head = document.createElement('div');
+    head.className = 'card-head';
+    head.innerHTML =
+      '<div class="card-icon">' + VENDOR_ICONS[cat.key] + '</div>' +
+      '<div class="card-title"><h3>' + titleTxt + '</h3><div class="sub">' + countTxt + '</div></div>' +
+      '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+    head.addEventListener('click', () => card.classList.toggle('open'));
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+    const list = document.createElement('div');
+    list.className = 'vendor-list';
+
+    if(!cat.vendors.length){
+      const empty = document.createElement('div');
+      empty.className = 'vendor-empty';
+      empty.textContent = currentLang === 'en'
+        ? 'No vendors listed yet — check back soon.'
+        : 'ຍັງບໍ່ມີລາຍຊື່ຮ້ານໃນໝວດນີ້ — ຈະອັບເດດໄວໆນີ້';
+      list.appendChild(empty);
+    } else {
+      cat.vendors.forEach(v => {
+        const a = document.createElement(v.fb ? 'a' : 'div');
+        a.className = 'vendor-card';
+        if(v.fb){ a.href = v.fb; a.target = '_blank'; a.rel = 'noopener'; }
+        a.innerHTML =
+          (v.img ? '<img class="vimg" src="'+v.img+'" alt="">' : '<div class="vimg"></div>') +
+          '<div class="vinfo"><div class="vname">'+v.name+'</div>' +
+          (v.note ? '<div class="vnote">'+v.note+'</div>' : '') + '</div>' +
+          (v.fb ? '<div class="vfb">f</div>' : '');
+        list.appendChild(a);
+      });
+    }
+
+    body.appendChild(list);
+    card.appendChild(head);
+    card.appendChild(body);
+    timeline.appendChild(card);
+  });
+}
 
 let totalItems = 0;
 
@@ -532,6 +801,8 @@ function applyFilter(){
 document.querySelectorAll('[data-lo]').forEach(el => { el.textContent = el.dataset.lo; });
 renderTimeline();
 </script>
+
+</div>
 
 </body>
 </html>
